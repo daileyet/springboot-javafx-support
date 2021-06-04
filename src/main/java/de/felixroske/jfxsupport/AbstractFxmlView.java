@@ -42,11 +42,10 @@ import static java.util.ResourceBundle.*;
  * @author Felix Roske
  * @author Andreas Jay
  */
-public abstract class AbstractFxmlView implements ApplicationContextAware {
+public abstract class AbstractFxmlView extends AbstractView {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFxmlView.class);
-
-    private final ObjectProperty<Object> presenterProperty;
+    public static final Charset DEFAULT_CHARSET = Charset.forName("ISO-8859-1");
 
     private final Optional<ResourceBundle> bundle;
 
@@ -70,13 +69,13 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
      * Instantiates a new abstract fxml view.
      */
     public AbstractFxmlView() {
+        super();
         LOGGER.debug("AbstractFxmlView construction");
         // Set the root path to package path
         final String filePathFromPackageName = PropertyReaderHelper.determineFilePathFromPackageName(getClass());
         setFxmlRootPath(filePathFromPackageName);
         annotation = getFXMLAnnotation();
         resource = getURLResource(annotation);
-        presenterProperty = new SimpleObjectProperty<>();
         bundle = getResourceBundle(getBundleName());
     }
 
@@ -102,18 +101,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
      */
     protected final FXMLView getFXMLAnnotation() {
         final Class<? extends AbstractFxmlView> theClass = this.getClass();
-        final FXMLView annotation = theClass.getAnnotation(FXMLView.class);
-        return annotation;
-    }
-
-    /**
-     * Creates the controller for type.
-     *
-     * @param type the type
-     * @return the object
-     */
-    private Object createControllerForType(final Class<?> type) {
-        return applicationContext.getBean(type);
+        return theClass.getAnnotation(FXMLView.class);
     }
 
     /*
@@ -398,21 +386,6 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
     }
 
     /**
-     * Does not initialize the view. Only registers the Consumer and waits until
-     * the the view is going to be created / the method FXMLView#getView or
-     * FXMLView#getViewAsync invoked.
-     *
-     * @param presenterConsumer listener for the presenter construction
-     */
-    public void getPresenter(final Consumer<Object> presenterConsumer) {
-
-        presenterProperty.addListener(
-                (final ObservableValue<? extends Object> o, final Object oldValue, final Object newValue) -> {
-                    presenterConsumer.accept(newValue);
-                });
-    }
-
-    /**
      * Gets the conventional name.
      *
      * @param ending the suffix to append
@@ -506,7 +479,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
     private Charset getResourceBundleCharset() {
         if (annotation != null)
             return Charset.forName(annotation.encoding());
-        return Charset.forName("ISO-8859-1");
+        return DEFAULT_CHARSET;
     }
 
     /**
