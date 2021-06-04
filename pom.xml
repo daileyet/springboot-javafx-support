@@ -126,9 +126,15 @@
   </dependencies>
 
   <distributionManagement>
+    <repository>
+      <id>open-releases</id>
+      <name>Nexus Release Repository</name>
+      <url>http://nb.openthinks.com:18081/nexus/repository/maven-releases/</url>
+    </repository>
     <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>open-snapshots</id>
+      <name>Nexus Snapshot Repository</name>
+      <url>http://nb.openthinks.com:18081/nexus/repository/maven-snapshots/</url>
     </snapshotRepository>
   </distributionManagement>
 
