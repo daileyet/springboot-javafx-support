@@ -5,7 +5,7 @@
 
   <groupId>de.roskenet</groupId>
   <artifactId>springboot-javafx-support</artifactId>
-  <version>2.1.7-SNAPSHOT</version>
+  <version>2.1.8-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>springboot-javafx-support</name>
@@ -36,6 +36,12 @@
       <email>f.roske@roskenet.de</email>
       <url>http://www.felixroske.de</url>
       <organization>roskenet</organization>
+    </developer>
+    <developer>
+      <name>Dailey Dai</name>
+      <email>dailey.dai@openthinks.com</email>
+      <url>http://www.openthinks.com</url>
+      <organization>openthinks</organization>
     </developer>
   </developers>
 
@@ -140,17 +146,17 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.3</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
-        </configuration>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.sonatype.plugins</groupId>-->
+<!--        <artifactId>nexus-staging-maven-plugin</artifactId>-->
+<!--        <version>1.6.3</version>-->
+<!--        <extensions>true</extensions>-->
+<!--        <configuration>-->
+<!--          <serverId>ossrh</serverId>-->
+<!--          <nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+<!--          <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>

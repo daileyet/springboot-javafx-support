@@ -100,7 +100,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
      *
      * @return the FXML annotation
      */
-    private FXMLView getFXMLAnnotation() {
+    protected final FXMLView getFXMLAnnotation() {
         final Class<? extends AbstractFxmlView> theClass = this.getClass();
         final FXMLView annotation = theClass.getAnnotation(FXMLView.class);
         return annotation;
@@ -355,7 +355,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
      * Gets the default title for to be shown in a (un)modal window.
      *
      */
-    String getDefaultTitle() {
+    protected final String getDefaultTitle() {
         if (annotation != null)
             return annotation.title();
         return "";
@@ -364,7 +364,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
     /*
      * Gets the default style for a (un)modal window.
      */
-    StageStyle getDefaultStyle() {
+    protected final StageStyle getDefaultStyle() {
         if (annotation != null) {
             final String style = annotation.stageStyle();
             return StageStyle.valueOf(style.toUpperCase());
@@ -437,7 +437,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
      *
      * @return the bundle name
      */
-    private String getBundleName() {
+    protected final String getBundleName() {
         if (annotation != null && StringUtils.isEmpty(annotation.bundle())) {
             final String lbundle = getClass().getPackage().getName() + "." + getConventionalName();
             LOGGER.debug("Bundle: {} based on conventional name.", lbundle);
