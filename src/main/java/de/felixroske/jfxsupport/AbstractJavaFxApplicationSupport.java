@@ -141,7 +141,7 @@ public abstract class AbstractJavaFxApplicationSupport extends Application {
     /**
      * Show initial view.
      */
-    private void showInitialView() {
+    protected void showInitialView() {
         final String stageStyle = applicationContext.getEnvironment().getProperty(Constant.KEY_STAGE_STYLE);
         if (stageStyle != null) {
             GUIState.getStage().initStyle(StageStyle.valueOf(stageStyle.toUpperCase()));
